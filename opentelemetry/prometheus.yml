@@ -2,6 +2,17 @@ global:
   scrape_interval: 15s
 
 scrape_configs:
-  - job_name: 'opentelemetry-app'
+  # Server メトリクス
+  - job_name: 'otel-server'
     static_configs:
-      - targets: ['host.docker.internal:8088']
+      - targets: ['server:8088']
+    
+  # Client メトリクス
+  - job_name: 'otel-client'
+    static_configs:
+      - targets: ['client:8088']
+    
+  # Jaeger メトリクス
+  - job_name: 'jaeger'
+    static_configs:
+      - targets: ['jaeger:14269']

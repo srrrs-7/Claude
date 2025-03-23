@@ -30,13 +30,21 @@ run-server:
 run-client:
 	$(GO) run ./cmd/client
 
-# Start docker compose services
-docker-up:
+# Docker targets
+docker-build:
+	docker-compose build
+
+docker-up: docker-build
 	docker-compose up -d
 
-# Stop docker compose services
+docker-logs:
+	docker-compose logs -f
+
 docker-down:
 	docker-compose down
+
+# Start everything in docker (for convenience)
+docker-start: docker-up
 
 # Clean build artifacts
 clean:
@@ -66,8 +74,11 @@ help:
 	@echo "  make build        - Build the server and client binaries"
 	@echo "  make run-server   - Run the server"
 	@echo "  make run-client   - Run the client"
-	@echo "  make docker-up    - Start docker compose services"
-	@echo "  make docker-down  - Stop docker compose services" 
+	@echo "  make docker-build - Build docker images"
+	@echo "  make docker-up    - Start all services in docker"
+	@echo "  make docker-logs  - Show logs for all docker services"
+	@echo "  make docker-down  - Stop all docker services" 
+	@echo "  make docker-start - Build and start all docker services"
 	@echo "  make clean        - Clean build artifacts"
 	@echo "  make test         - Run tests"
 	@echo "  make tidy         - Tidy go modules"

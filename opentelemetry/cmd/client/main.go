@@ -20,7 +20,7 @@ import (
 )
 
 const (
-	serverURL = "http://localhost:8080/hello"
+	defaultServerURL = "http://localhost:8080/hello"
 )
 
 // Metrics for the client application
@@ -30,6 +30,14 @@ var (
 	errorCount    metric.Int64Counter
 	latencyHist   metric.Float64Histogram
 )
+
+// 環境変数からサーバーURLを取得
+func getServerURL() string {
+	if serverURL := os.Getenv("SERVER_URL"); serverURL != "" {
+		return serverURL
+	}
+	return defaultServerURL
+}
 
 func main() {
 	// Load configuration
@@ -76,7 +84,9 @@ func main() {
 	}
 
 	// Run the client workload
-	if err := runClient(ctx, client); err != nil {
+	serverURL := getServerURL()
+	log.Printf("Connecting to server at: %s", serverURL)
+	if err := runClient(ctx, client, serverURL); err != nil {
 		log.Fatalf("Client error: %v", err)
 	}
 }
@@ -122,7 +132,7 @@ func initMetrics() error {
 }
 
 // runClient executes the client workload
-func runClient(ctx context.Context, client *api.Client) error {
+func runClient(ctx context.Context, client *api.Client, serverURL string) error {
 	tracer := otel.Tracer("client-app")
 
 	// Loop until context is cancelled
@@ -151,7 +161,7 @@ func runClient(ctx context.Context, client *api.Client) error {
 
 		// Execute request with timing
 		startTime := time.Now()
-		if err := executeRequest(reqCtx, client, i); err != nil {
+		if err := executeRequest(reqCtx, client, i, serverURL); err != nil {
 			errorCount.Add(reqCtx, 1, metric.WithAttributes(
 				attribute.Int("request.number", i),
 			))
@@ -182,7 +192,7 @@ func runClient(ctx context.Context, client *api.Client) error {
 }
 
 // executeRequest makes a single request
-func executeRequest(ctx context.Context, client *api.Client, requestNum int) error {
+func executeRequest(ctx context.Context, client *api.Client, requestNum int, serverURL string) error {
 	// Create a child span for this specific request
 	tracer := otel.Tracer("client-app")
 	ctx, span := tracer.Start(ctx, fmt.Sprintf("request-%d", requestNum))
