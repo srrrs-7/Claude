@@ -1,0 +1,41 @@
+FROM golang:1.22-alpine AS deps
+
+WORKDIR /app
+
+# Install required packages
+RUN apk add --no-cache git
+
+# Copy go.mod only
+COPY go.mod ./
+
+# Initialize go.sum and download dependencies
+RUN go mod tidy
+RUN go mod download
+
+# Builder stages for server and client
+FROM deps AS server-builder
+
+WORKDIR /app
+COPY . .
+RUN CGO_ENABLED=0 GOOS=linux go build -o server ./cmd/server
+
+FROM deps AS client-builder
+
+WORKDIR /app
+COPY . .
+RUN CGO_ENABLED=0 GOOS=linux go build -o client ./cmd/client
+
+# Final stage for server
+FROM alpine:latest AS server
+
+WORKDIR /app
+COPY --from=server-builder /app/server .
+EXPOSE 8080
+CMD ["./server"]
+
+# Final stage for client
+FROM alpine:latest AS client
+
+WORKDIR /app
+COPY --from=client-builder /app/client .
+CMD ["./client"]

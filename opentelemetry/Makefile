@@ -31,7 +31,10 @@ run-client:
 	$(GO) run ./cmd/client
 
 # Docker targets
-docker-build:
+setup-deps:
+	go mod tidy
+
+docker-build: setup-deps
 	docker-compose build
 
 docker-up: docker-build
