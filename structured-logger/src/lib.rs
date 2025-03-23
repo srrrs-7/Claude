@@ -3,24 +3,26 @@ pub mod error;
 pub mod formatter;
 pub mod logger;
 
-use crate::config::LoggerConfig;
 use crate::logger::StructuredLogger;
-use log::LevelFilter;
+
+// Re-export commonly used types for user convenience
+pub use crate::config::{LoggerConfig, OutputFormat};
+pub use crate::logger::LogContext;
 
 /// Initialize the structured logger with default configuration
 pub fn init() -> Result<(), error::LoggerError> {
-    let config = LoggerConfig::default();
+    let config = config::LoggerConfig::default();
     init_with_config(config)
 }
 
 /// Initialize the structured logger with custom configuration
-pub fn init_with_config(config: LoggerConfig) -> Result<(), error::LoggerError> {
+pub fn init_with_config(config: config::LoggerConfig) -> Result<(), error::LoggerError> {
     let max_level = config.level;
     let logger = StructuredLogger::new(config);
-    
-    log::set_boxed_logger(Box::new(logger))?;
+
+    log::set_logger(Box::leak(Box::new(logger)))?;
     log::set_max_level(max_level);
-    
+
     Ok(())
 }
 
