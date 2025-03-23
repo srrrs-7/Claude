@@ -1,0 +1,27 @@
+[package]
+name = "structured-logger"
+version = "0.1.0"
+edition = "2021"
+authors = ["srrrs <your.email@example.com>"]
+description = "A structured JSON logger library for Rust applications"
+license = "MIT"
+repository = "https://github.com/srrrs/structured-logger"
+documentation = "https://docs.rs/structured-logger"
+readme = "README.md"
+keywords = ["logging", "json", "structured", "log"]
+categories = ["development-tools::debugging"]
+
+[lib]
+name = "structured_logger"
+path = "src/lib.rs"
+
+[dependencies]
+log = "0.4"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+chrono = { version = "0.4", features = ["serde"] }
+colored = "2.0"
+thiserror = "1.0"
+
+[dev-dependencies]
+tokio = { version = "1.0", features = ["full"] }

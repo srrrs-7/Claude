@@ -1,0 +1,11 @@
+/Users/srrrs/claude/weather-app/target/debug/deps/libwry-c3929b393630613b.rmeta: /Users/srrrs/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wry-0.24.11/src/lib.rs /Users/srrrs/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wry-0.24.11/src/application.rs /Users/srrrs/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wry-0.24.11/src/webview/mod.rs /Users/srrrs/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wry-0.24.11/src/webview/web_context.rs /Users/srrrs/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wry-0.24.11/src/webview/wkwebview/mod.rs /Users/srrrs/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wry-0.24.11/src/webview/wkwebview/download.rs /Users/srrrs/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wry-0.24.11/src/webview/wkwebview/file_drop.rs
+
+/Users/srrrs/claude/weather-app/target/debug/deps/wry-c3929b393630613b.d: /Users/srrrs/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wry-0.24.11/src/lib.rs /Users/srrrs/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wry-0.24.11/src/application.rs /Users/srrrs/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wry-0.24.11/src/webview/mod.rs /Users/srrrs/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wry-0.24.11/src/webview/web_context.rs /Users/srrrs/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wry-0.24.11/src/webview/wkwebview/mod.rs /Users/srrrs/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wry-0.24.11/src/webview/wkwebview/download.rs /Users/srrrs/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wry-0.24.11/src/webview/wkwebview/file_drop.rs
+
+/Users/srrrs/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wry-0.24.11/src/lib.rs:
+/Users/srrrs/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wry-0.24.11/src/application.rs:
+/Users/srrrs/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wry-0.24.11/src/webview/mod.rs:
+/Users/srrrs/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wry-0.24.11/src/webview/web_context.rs:
+/Users/srrrs/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wry-0.24.11/src/webview/wkwebview/mod.rs:
+/Users/srrrs/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wry-0.24.11/src/webview/wkwebview/download.rs:
+/Users/srrrs/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wry-0.24.11/src/webview/wkwebview/file_drop.rs:
