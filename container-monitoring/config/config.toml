@@ -1,0 +1,32 @@
+[general]
+# How often to collect metrics in seconds
+interval = 15
+
+[telemetry]
+service_name = "container-monitoring"
+otel_exporter = "otlp"
+otel_endpoint = "http://otel-collector:4317"
+prometheus_port = 8080
+
+[docker]
+# Docker socket path, used for connecting to Docker API
+socket_path = "/var/run/docker.sock"
+
+[metrics]
+# Enable/disable specific metric collections
+enable_cpu = true
+enable_memory = true
+enable_network = true
+enable_disk = true
+
+# Optional: Filter containers to monitor
+[metrics.container_filters]
+# List of container IDs to monitor (if empty, all containers are monitored)
+container_ids = []
+# List of container name patterns to match (supports glob patterns)
+name_patterns = []
+# List of image patterns to match (supports glob patterns)
+image_patterns = []
+
+[logging]
+level = "info"

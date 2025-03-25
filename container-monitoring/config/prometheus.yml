@@ -1,0 +1,15 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'container-monitoring'
+    static_configs:
+      - targets: ['container-monitoring:8080']
+        labels:
+          service: 'container-monitoring'
+
+  - job_name: 'otel-collector'
+    scrape_interval: 10s
+    static_configs:
+      - targets: ['otel-collector:8889']

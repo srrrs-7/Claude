@@ -1,0 +1,5 @@
+[build]
+rustc-check = "1.85.0"
+
+[target.'cfg(all())']
+rustflags = ["-D", "warnings"]

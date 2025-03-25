@@ -1,0 +1,66 @@
+[package]
+name = "container-monitoring"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.85.0"
+authors = ["srrrs"]
+
+# テスト統合用の設定
+[lib]
+name = "container_monitoring"
+path = "src/lib.rs"
+
+[dependencies]
+# OpenTelemetry
+opentelemetry = { version = "0.21", features = ["metrics", "trace", "rt-tokio"] }
+opentelemetry-otlp = { version = "0.14", features = ["metrics", "trace"] }
+opentelemetry_sdk = { version = "0.21", features = ["rt-tokio"] }
+opentelemetry-semantic-conventions = "0.13"
+
+# Container metrics collection
+bollard = "0.15"  # Docker API client
+
+# Async runtime
+tokio = { version = "1", features = ["full"] }
+
+# Error handling
+anyhow = "1.0"
+thiserror = "1.0"
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+tracing-opentelemetry = "0.21"
+
+# Configuration
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+config = "0.13"
+
+# CLI
+clap = { version = "4.3", features = ["derive"] }
+
+# Time handling
+chrono = "0.4"
+
+# Vector handling
+futures = "0.3"
+
+# HTTP client for API interactions
+reqwest = { version = "0.11", features = ["json"] }
+
+# Prometheus exporter
+prometheus = "0.13.3"
+warp = "0.3"  # Lightweight web server framework
+
+[dev-dependencies]
+mockall = "0.11"
+async-trait = "0.1.68"
+tempfile = "3.8"
+serial_test = "2.0"
+criterion = { version = "0.5", features = ["html_reports"] }
+pprof = { version = "0.13", features = ["flamegraph"] }
+
+[[bench]]
+name = "metrics_benchmark"
+harness = false
