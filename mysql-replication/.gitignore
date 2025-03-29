@@ -1,0 +1,9 @@
+.env
+master/data/*
+slave1/data/*
+slave2/data/*
+slave3/data/*
+!master/data/.gitkeep
+!slave1/data/.gitkeep
+!slave2/data/.gitkeep
+!slave3/data/.gitkeep

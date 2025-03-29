@@ -1,0 +1,88 @@
+version: "3"
+
+services:
+  mysql-master:
+    image: mysql:8.0
+    container_name: mysql-master
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpassword}
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: mypassword
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./master/data:/var/lib/mysql
+      - ./master/conf/my.cnf:/etc/mysql/my.cnf
+      - ./master/init:/docker-entrypoint-initdb.d
+      - ./master/ssl:/etc/mysql/ssl
+    networks:
+      - mysql-network
+
+  mysql-slave1:
+    image: mysql:8.0
+    container_name: mysql-slave1
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpassword}
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: mypassword
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./slave1/data:/var/lib/mysql
+      - ./slave1/conf/my.cnf:/etc/mysql/my.cnf
+      - ./slave1/init:/docker-entrypoint-initdb.d
+      - ./slave1/ssl:/etc/mysql/ssl
+    depends_on:
+      - mysql-master
+    networks:
+      - mysql-network
+
+  mysql-slave2:
+    image: mysql:8.0
+    container_name: mysql-slave2
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpassword}
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: mypassword
+    ports:
+      - "3308:3306"
+    volumes:
+      - ./slave2/data:/var/lib/mysql
+      - ./slave2/conf/my.cnf:/etc/mysql/my.cnf
+      - ./slave2/init:/docker-entrypoint-initdb.d
+      - ./slave2/ssl:/etc/mysql/ssl
+    depends_on:
+      - mysql-master
+    networks:
+      - mysql-network
+
+  mysql-slave3:
+    image: mysql:8.0
+    container_name: mysql-slave3
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpassword}
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: mypassword
+    ports:
+      - "3309:3306"
+    volumes:
+      - ./slave3/data:/var/lib/mysql
+      - ./slave3/conf/my.cnf:/etc/mysql/my.cnf
+      - ./slave3/init:/docker-entrypoint-initdb.d
+      - ./slave3/ssl:/etc/mysql/ssl
+    depends_on:
+      - mysql-master
+    networks:
+      - mysql-network
+
+networks:
+  mysql-network:
+    driver: bridge
