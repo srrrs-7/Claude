@@ -17,8 +17,8 @@ if [ -z "${MYSQL_ROOT_PASSWORD}" ]; then
 fi
 
 echo "Setting up SSL certificates..."
-chmod +x setup-ssl.sh
-./setup-ssl.sh
+chmod +x ./.scripts/setup-ssl.sh
+./.scripts/setup-ssl.sh
 
 echo "Waiting for MySQL Master to be ready..."
 until docker exec mysql-master mysql -u root -p$MYSQL_ROOT_PASSWORD -e "SELECT 1" 2>/dev/null; do

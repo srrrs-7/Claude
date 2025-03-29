@@ -1,9 +1,42 @@
+# Environment variables
 .env
+# Docker Compose override
+docker-compose.override.yml
+
+# Data directories
 master/data/*
 slave1/data/*
 slave2/data/*
 slave3/data/*
+
+# Keep .gitkeep files
 !master/data/.gitkeep
 !slave1/data/.gitkeep
 !slave2/data/.gitkeep
 !slave3/data/.gitkeep
+
+# SSL certificates
+ssl/*.pem
+master/ssl/*.pem
+slave1/ssl/*.pem
+slave2/ssl/*.pem
+slave3/ssl/*.pem
+
+# Keep SSL directories
+!ssl/.gitkeep
+!master/ssl/.gitkeep
+!slave1/ssl/.gitkeep
+!slave2/ssl/.gitkeep
+!slave3/ssl/.gitkeep
+
+# Logs
+*.log
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

@@ -1,4 +1,4 @@
-.PHONY: setup start stop restart status logs clean test fix reset ssl check deep-fix fix-full-db help
+.PHONY: setup start stop restart status logs clean test fix reset ssl check help
 
 # Default target
 help:
@@ -25,10 +25,10 @@ help:
 	@echo "  make clean     - Remove all containers and data volumes"
 
 # Setup the environment
-setup: check-env start
+setup: ssl start
 	@echo "Setting up MySQL replication..."
-	@chmod +x setup-replication.sh test-replication.sh fix-replication.sh
-	@./setup-replication.sh || (echo "\033[0;33mWARNING: Initial setup failed. Attempting to fix...\033[0m" && make fix)
+	@chmod +x ./.scripts/setup-replication.sh ./.scripts/test-replication.sh
+	@./.scripts/setup-replication.sh || (echo "\033[0;33mWARNING: Initial setup failed. Attempting to fix...\033[0m" && make fix)
 
 # Check if .env file exists
 check-env:
@@ -72,27 +72,27 @@ logs-follow:
 # Run replication test
 test:
 	@echo "Testing MySQL replication..."
-	@chmod +x test-replication.sh
-	@./test-replication.sh || (echo "\033[0;33mWARNING: Test failed. Attempting to fix replication...\033[0m" && make fix && make test)
+	@chmod +x ./.scripts/test-replication.sh
+	@./.scripts/test-replication.sh || (echo "\033[0;33mWARNING: Test failed. Attempting to fix replication...\033[0m" && make fix && make test)
+
+# Fix replication issues
+fix:
+	@echo "Attempting to fix replication issues..."
+	@chmod +x ./.scripts/fix-replication.sh
+	@./.scripts/fix-replication.sh
+	@echo "\033[0;32mReplication issues fixed.\033[0m"
 
 # Check replication status
 check:
 	@echo "Checking replication status..."
-	@chmod +x check-replication.sh
-	@./check-replication.sh
-
-# Deep fix replication issues
-deep-fix:
-	@echo "Performing deep fix of replication..."
-	@chmod +x deep-fix.sh
-	@./deep-fix.sh
-	@echo "\033[0;32mDeep fix completed.\033[0m"
+	@chmod +x ./.scripts/check-replication.sh
+	@./.scripts/check-replication.sh
 
 # Set up SSL
 ssl: check-env
 	@echo "Setting up SSL for secure replication..."
-	@chmod +x setup-ssl.sh
-	@./setup-ssl.sh
+	@chmod +x ./.scripts/setup-ssl.sh
+	@./.scripts/setup-ssl.sh
 	@echo "\033[0;32mSSL setup completed.\033[0m"
 
 # Connect to MySQL master shell

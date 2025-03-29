@@ -1,0 +1,24 @@
+version: '3'
+
+# This is an example override file for docker-compose.yml
+# Copy this file to docker-compose.override.yml and customize it for your environment
+# docker-compose.override.yml will not be tracked by Git
+
+services:
+  mysql-master:
+    environment:
+      # Override environment variables here
+      # MYSQL_ROOT_PASSWORD: custom_password
+    ports:
+      # Override port mapping if needed
+      # - "13306:3306"
+    # Add any other customizations here
+
+  mysql-slave1:
+    # Add customizations for slave1 here
+
+  mysql-slave2:
+    # Add customizations for slave2 here
+
+  mysql-slave3:
+    # Add customizations for slave3 here
