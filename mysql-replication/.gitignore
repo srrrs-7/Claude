@@ -1,7 +1,7 @@
 # Environment variables
 .env
 # Docker Compose override
-docker-compose.override.yml
+compose.override.yml
 
 # Data directories
 master/data/*
